@@ -40,7 +40,7 @@ const HubsPage = () => {
           {hubs.map((hub, index) => (
             <NeoCard key={index} className="bg-white relative">
               <div className="absolute top-4 right-4">
-                <div className="flex items-center gap-2 bg-[#22C55E] text-white px-3 py-1 border-2 border-black font-bold text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                <div className="flex items-center gap-2 bg-[#22C55E] text-white px-3 py-1 border-2 border-black font-bold text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                   <Activity className="w-4 h-4 animate-pulse" /> ACTIVE
                 </div>
               </div>

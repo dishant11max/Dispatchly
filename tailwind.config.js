@@ -4,6 +4,18 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', "sans-serif"],
+        heading: ['"Space Grotesk"', "sans-serif"],
+      },
+      borderWidth: {
+        neo: "var(--neo-border)",
+      },
+      boxShadow: {
+        neo: "var(--neo-shadow) var(--neo-shadow) 0px 0px rgba(0,0,0,1)",
+        "neo-hover":
+          "var(--neo-shadow-hover) var(--neo-shadow-hover) 0px 0px rgba(0,0,0,1)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

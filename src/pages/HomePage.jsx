@@ -18,14 +18,14 @@ const HomePage = () => {
     <NeoLayout>
       {/* Hero Section */}
       <header className="pt-8 pb-20 px-6 container mx-auto text-center max-w-5xl">
-        <div className="inline-block mb-6 px-4 py-2 bg-[#FF8C00] border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-[-2deg]">
+        <div className="inline-block mb-6 px-4 py-2 bg-[#FF8C00] border-4 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-[-2deg]">
           NOW LIVE IN MUMBAI & DELHI
         </div>
         <h1 className="text-6xl md:text-8xl font-black leading-[0.9] mb-8 tracking-tighter uppercase">
           India's Fastest <br />
           <span
             className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] via-black to-[#22C55E] stroke-black"
-            style={{ WebkitTextStroke: "2px black" }}
+            style={{ WebkitTextStroke: "1px black" }}
           >
             Logistics Network
           </span>
@@ -103,7 +103,7 @@ const HomePage = () => {
               key={index}
               className={`${stat.color} flex flex-col justify-between`}
             >
-              <div className="mb-4 bg-black text-white w-16 h-16 flex items-center justify-center border-2 border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+              <div className="mb-4 bg-black text-white w-16 h-16 flex items-center justify-center border-4 border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
                 {stat.icon}
               </div>
               <div>
@@ -167,7 +167,7 @@ const HomePage = () => {
                 {item.step}
               </div>
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-[#FF8C00] border-2 border-black flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <div className="w-16 h-16 bg-[#FF8C00] border-4 border-black flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                   <span className="text-3xl font-black">{item.step}</span>
                 </div>
                 <h3 className="text-2xl font-black uppercase mb-4">
@@ -198,7 +198,7 @@ const HomePage = () => {
             (company, index) => (
               <div
                 key={index}
-                className="bg-white border-4 border-black p-6 flex items-center justify-center h-24 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all"
+                className="bg-white border-4 border-black p-6 flex items-center justify-center h-24 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all"
               >
                 <span className="font-black text-xl text-center">
                   {company}
@@ -212,7 +212,7 @@ const HomePage = () => {
       {/* Features / Locations */}
       <section className="py-20 bg-black text-white border-t-4 border-black">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-gray-700 pb-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b-4 border-gray-700 pb-6">
             <h2 className="text-5xl md:text-6xl font-black uppercase">
               Operating <br />
               <span className="text-[#FF8C00]">Hubs</span>
@@ -237,7 +237,7 @@ const HomePage = () => {
             ].map((city) => (
               <div
                 key={city}
-                className="group relative overflow-hidden border-2 border-white p-6 hover:bg-white hover:text-black transition-colors cursor-pointer"
+                className="group relative overflow-hidden border-4 border-white p-6 hover:bg-white hover:text-black transition-colors cursor-pointer"
               >
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <ArrowRight className="w-6 h-6" />
@@ -266,15 +266,15 @@ const HomePage = () => {
               </p>
               <div className="flex flex-wrap gap-4 font-bold">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#22C55E] border-2 border-black"></div>
+                  <div className="w-3 h-3 bg-[#22C55E] border-4 border-black"></div>
                   <span>Instant Matching</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#22C55E] border-2 border-black"></div>
+                  <div className="w-3 h-3 bg-[#22C55E] border-4 border-black"></div>
                   <span>Zero Commission</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#22C55E] border-2 border-black"></div>
+                  <div className="w-3 h-3 bg-[#22C55E] border-4 border-black"></div>
                   <span>24/7 Support</span>
                 </div>
               </div>

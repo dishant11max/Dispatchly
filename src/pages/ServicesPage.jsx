@@ -82,7 +82,7 @@ const ServicesPage = () => {
                 <div className="bg-[#FF8C00] w-20 h-20 border-2 border-black flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-black uppercase mb-6 border-b-2 border-black pb-2">
+                <h3 className="text-3xl font-black uppercase mb-6 border-b-4 border-black pb-2">
                   {service.title}
                 </h3>
                 <ul className="space-y-3 mb-8">
@@ -97,10 +97,10 @@ const ServicesPage = () => {
 
               <div>
                 <div className="flex gap-4 mb-6 text-sm font-black uppercase">
-                  <span className="bg-[#22C55E] px-3 py-1 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-white">
+                  <span className="bg-[#22C55E] px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-white">
                     ETA: {service.eta}
                   </span>
-                  <span className="bg-white px-3 py-1 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <span className="bg-white px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                     {service.price}
                   </span>
                 </div>
