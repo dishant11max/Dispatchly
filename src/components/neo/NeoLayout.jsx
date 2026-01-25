@@ -32,6 +32,7 @@ const NeoLayout = ({ children }) => {
     { label: "Services", path: "/services" },
     { label: "Hubs", path: "/hubs" },
     { label: "About", path: "/about" },
+    { label: "Contact", path: "/contact" },
   ];
 
   // Check if a path is active

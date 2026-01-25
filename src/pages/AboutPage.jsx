@@ -1,7 +1,16 @@
 import React from "react";
-import { ShieldCheck, Users, Target, Rocket } from "lucide-react";
+import {
+  ShieldCheck,
+  Users,
+  Rocket,
+  Code,
+  Github,
+  Linkedin,
+  ExternalLink,
+} from "lucide-react";
 import NeoLayout from "@/components/neo/NeoLayout";
 import NeoCard from "@/components/neo/NeoCard";
+import NeoButton from "@/components/neo/NeoButton";
 
 const AboutPage = () => {
   return (
@@ -47,8 +56,92 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* Built By Section */}
+      <section className="py-20 bg-black text-white border-y-4 border-black">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-black uppercase mb-4">Built By</h2>
+            <p className="text-xl font-medium text-gray-400">
+              A solo developer passionate about solving real problems
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <NeoCard className="bg-white text-black p-8">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                {/* Avatar */}
+                <div className="w-32 h-32 bg-gradient-to-br from-[#FF8C00] to-[#22C55E] border-4 border-black flex items-center justify-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+                  <Code className="w-16 h-16 text-white" />
+                </div>
+
+                {/* Info */}
+                <div className="text-center md:text-left flex-1">
+                  <h3 className="text-3xl font-black uppercase mb-2">
+                    {/* UPDATE YOUR NAME HERE */}
+                    The Developer
+                  </h3>
+                  <p className="text-lg font-bold text-[#FF8C00] mb-4">
+                    Founder & Full Stack Developer
+                  </p>
+                  <p className="font-medium text-gray-600 mb-6">
+                    Building Dispatchly from ground up — designing, coding, and
+                    shipping every feature. Passionate about creating technology
+                    that empowers businesses and drivers alike.
+                  </p>
+
+                  {/* Social Links */}
+                  <div className="flex gap-4 justify-center md:justify-start">
+                    <a
+                      href="https://github.com/YOUR_USERNAME"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-white hover:text-black transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                    >
+                      <Github className="w-5 h-5" />
+                      GitHub
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/YOUR_USERNAME"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-[#0077B5] text-white border-2 border-black font-bold hover:bg-white hover:text-[#0077B5] transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                    >
+                      <Linkedin className="w-5 h-5" />
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </NeoCard>
+          </div>
+
+          {/* Tech Stack */}
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-black uppercase mb-6 text-gray-400">
+              Built With
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                "React",
+                "Vite",
+                "Tailwind CSS",
+                "React Router",
+                "Lucide Icons",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="px-4 py-2 bg-white/10 border-2 border-white/30 font-bold text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Values */}
-      <section className="py-20 bg-[#F4F4F5] border-y-4 border-black">
+      <section className="py-20 bg-[#F4F4F5] border-b-4 border-black">
         <div className="container mx-auto px-6">
           <h2 className="text-5xl font-black uppercase text-center mb-16">
             Core Values
