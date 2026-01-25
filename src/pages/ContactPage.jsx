@@ -8,15 +8,20 @@ import {
   Send,
   MessageSquare,
   HelpCircle,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 import NeoLayout from "@/components/neo/NeoLayout";
 import NeoCard from "@/components/neo/NeoCard";
 import NeoButton from "@/components/neo/NeoButton";
 import { NeoInput, NeoSelect, NeoTextarea } from "@/components/neo/NeoInput";
+import { contactService } from "@/lib/services";
 
 const ContactPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,16 +32,28 @@ const ContactPage = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    // Reset after 3 seconds
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    }, 3000);
+    setLoading(true);
+    setError(null);
+
+    try {
+      await contactService.submitContact(formData);
+      setFormSubmitted(true);
+    } catch (err) {
+      console.error("Contact submission error:", err);
+      setError(err.message || "Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setFormSubmitted(false);
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
   const faqs = [
@@ -115,9 +132,12 @@ const ContactPage = () => {
                   <h3 className="text-2xl font-black uppercase mb-2">
                     Message Sent!
                   </h3>
-                  <p className="font-medium text-gray-600">
+                  <p className="font-medium text-gray-600 mb-6">
                     We'll get back to you within 24 hours.
                   </p>
+                  <NeoButton variant="secondary" onClick={resetForm}>
+                    Send Another Message
+                  </NeoButton>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -175,8 +195,29 @@ const ContactPage = () => {
                     rows={5}
                     required
                   />
-                  <NeoButton type="submit" className="w-full">
-                    Send Message <Send className="w-5 h-5" />
+
+                  {/* Error Display */}
+                  {error && (
+                    <div className="bg-red-50 border-4 border-red-500 p-4 flex items-center gap-3">
+                      <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0" />
+                      <p className="font-bold text-red-700">{error}</p>
+                    </div>
+                  )}
+
+                  <NeoButton
+                    type="submit"
+                    className="w-full"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" /> Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message <Send className="w-5 h-5" />
+                      </>
+                    )}
                   </NeoButton>
                 </form>
               )}

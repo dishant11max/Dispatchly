@@ -9,14 +9,20 @@ import {
   Weight,
   CheckCircle,
   ArrowRight,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 import NeoModal from "./NeoModal";
 import NeoButton from "./NeoButton";
 import { NeoInput, NeoSelect, NeoTextarea } from "./NeoInput";
+import { quoteService } from "@/lib/services";
 
 const QuoteModal = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [quoteId, setQuoteId] = useState(null);
   const [formData, setFormData] = useState({
     // Step 1 - Locations
     pickupCity: "",
@@ -37,17 +43,32 @@ const QuoteModal = ({ isOpen, onClose }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(null); // Clear error on input change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // For now, just show success - backend integration later
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result = await quoteService.submitQuote(formData);
+      setQuoteId(result.id);
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Quote submission error:", err);
+      setError(err.message || "Failed to submit quote. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = () => {
     setStep(1);
     setSubmitted(false);
+    setLoading(false);
+    setError(null);
+    setQuoteId(null);
     setFormData({
       pickupCity: "",
       pickupAddress: "",
@@ -123,8 +144,8 @@ const QuoteModal = ({ isOpen, onClose }) => {
           </h3>
           <p className="text-lg font-medium mb-2">
             Quote ID:{" "}
-            <span className="font-black">
-              DPL{Date.now().toString().slice(-6)}
+            <span className="font-black font-mono">
+              {quoteId ? quoteId.slice(0, 8).toUpperCase() : "—"}
             </span>
           </p>
           <p className="text-gray-600 mb-8">
@@ -398,6 +419,14 @@ const QuoteModal = ({ isOpen, onClose }) => {
           </div>
         )}
 
+        {/* Error Display */}
+        {error && (
+          <div className="bg-red-50 border-4 border-red-500 p-4 mt-6 flex items-center gap-3">
+            <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0" />
+            <p className="font-bold text-red-700">{error}</p>
+          </div>
+        )}
+
         {/* Navigation Buttons */}
         <div className="flex gap-4 mt-8">
           {step > 1 && (
@@ -406,6 +435,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
               variant="secondary"
               onClick={prevStep}
               className="flex-1"
+              disabled={loading}
             >
               Back
             </NeoButton>
@@ -415,8 +445,21 @@ const QuoteModal = ({ isOpen, onClose }) => {
               Next <ArrowRight className="w-5 h-5" />
             </NeoButton>
           ) : (
-            <NeoButton type="submit" variant="success" className="flex-1">
-              Submit Request <CheckCircle className="w-5 h-5" />
+            <NeoButton
+              type="submit"
+              variant="success"
+              className="flex-1"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" /> Submitting...
+                </>
+              ) : (
+                <>
+                  Submit Request <CheckCircle className="w-5 h-5" />
+                </>
+              )}
             </NeoButton>
           )}
         </div>
