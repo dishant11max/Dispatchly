@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Truck,
   Package,
@@ -10,6 +10,7 @@ import {
 import NeoLayout from "@/components/neo/NeoLayout";
 import NeoCard from "@/components/neo/NeoCard";
 import NeoButton from "@/components/neo/NeoButton";
+import QuoteModal from "@/components/neo/QuoteModal";
 
 const ServicesPage = () => {
   const services = [
@@ -59,8 +60,14 @@ const ServicesPage = () => {
     },
   ];
 
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+
   return (
     <NeoLayout>
+      <QuoteModal
+        isOpen={quoteModalOpen}
+        onClose={() => setQuoteModalOpen(false)}
+      />
       <div className="container mx-auto px-6">
         <div className="mb-12 border-b-4 border-black pb-8">
           <h1 className="text-5xl md:text-7xl font-black uppercase mb-4">
@@ -104,7 +111,10 @@ const ServicesPage = () => {
                     {service.price}
                   </span>
                 </div>
-                <NeoButton className="w-full justify-between group-hover:bg-black group-hover:text-white transition-colors">
+                <NeoButton
+                  className="w-full justify-between group-hover:bg-black group-hover:text-white transition-colors"
+                  onClick={() => setQuoteModalOpen(true)}
+                >
                   GET QUOTE <ArrowRight className="w-5 h-5" />
                 </NeoButton>
               </div>

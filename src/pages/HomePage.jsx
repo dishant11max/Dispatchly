@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -10,12 +10,19 @@ import {
 import NeoLayout from "@/components/neo/NeoLayout";
 import NeoButton from "@/components/neo/NeoButton";
 import NeoCard from "@/components/neo/NeoCard";
+import QuoteModal from "@/components/neo/QuoteModal";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
 
   return (
     <NeoLayout>
+      <QuoteModal
+        isOpen={quoteModalOpen}
+        onClose={() => setQuoteModalOpen(false)}
+      />
+
       {/* Hero Section */}
       <header className="pt-8 pb-20 px-6 container mx-auto text-center max-w-5xl">
         <div className="inline-block mb-6 px-4 py-2 bg-[#FF8C00] border-4 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-[-2deg]">
@@ -49,11 +56,7 @@ const HomePage = () => {
           </NeoButton>
           <NeoButton
             variant="secondary"
-            onClick={() => {
-              document
-                .getElementById("cta-section")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => setQuoteModalOpen(true)}
             className="w-full md:w-auto text-xl py-4 px-8"
           >
             BOOK A TRUCK <ArrowRight className="w-6 h-6" />
@@ -218,7 +221,7 @@ const HomePage = () => {
               <span className="text-[#FF8C00]">Hubs</span>
             </h2>
             <div className="text-right mt-4 md:mt-0">
-              <NeoButton variant="primary">
+              <NeoButton variant="primary" onClick={() => navigate("/hubs")}>
                 VIEW ALL HUBS <ArrowRight className="w-4 h-4" />
               </NeoButton>
             </div>
@@ -280,12 +283,18 @@ const HomePage = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <NeoButton className="w-full text-2xl py-6 px-8">
+              <NeoButton
+                className="w-full text-2xl py-6 px-8"
+                onClick={() => setQuoteModalOpen(true)}
+              >
                 GET STARTED NOW
               </NeoButton>
               <NeoButton
                 variant="secondary"
                 className="w-full text-xl py-4 px-8"
+                onClick={() =>
+                  (window.location.href = "mailto:sales@dispatchly.in")
+                }
               >
                 TALK TO SALES
               </NeoButton>
