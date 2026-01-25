@@ -4,6 +4,7 @@ import ServicesPage from "@/pages/ServicesPage";
 import HubsPage from "@/pages/HubsPage";
 import AboutPage from "@/pages/AboutPage";
 import DriverLoginPage from "@/pages/DriverLoginPage";
+import DriverDashboardPage from "@/pages/DriverDashboardPage";
 import ContactPage from "@/pages/ContactPage";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/driver-login" element={<DriverLoginPage />} />
+        <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
       </Routes>
     </Router>
   );

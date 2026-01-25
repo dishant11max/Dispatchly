@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import NeoButton from "./NeoButton";
+import { supabase } from "@/lib/supabase";
 
 // Simple SVG icons for social media
 const TwitterIcon = () => (
@@ -25,6 +26,23 @@ const NeoLayout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  // Check auth state on mount
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Navigation items with paths
   const navItems = [
@@ -99,13 +117,23 @@ const NeoLayout = ({ children }) => {
 
         {/* Action Buttons - Right - Desktop Only */}
         <div className="hidden md:flex gap-4 ml-auto">
-          <NeoButton
-            variant="secondary"
-            className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
-            onClick={() => navigate("/driver-login")}
-          >
-            Driver Login
-          </NeoButton>
+          {user ? (
+            <NeoButton
+              variant="secondary"
+              className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
+              onClick={() => navigate("/driver-dashboard")}
+            >
+              Dashboard
+            </NeoButton>
+          ) : (
+            <NeoButton
+              variant="secondary"
+              className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
+              onClick={() => navigate("/driver-login")}
+            >
+              Driver Login
+            </NeoButton>
+          )}
           <NeoButton
             variant="dark"
             className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(128,128,128,1)] text-sm"
@@ -163,16 +191,29 @@ const NeoLayout = ({ children }) => {
               ))}
 
               <div className="mt-8 flex flex-col gap-4">
-                <NeoButton
-                  variant="secondary"
-                  className="w-full py-3"
-                  onClick={() => {
-                    navigate("/driver-login");
-                    setMobileMenuOpen(false);
-                  }}
-                >
-                  Driver Login
-                </NeoButton>
+                {user ? (
+                  <NeoButton
+                    variant="secondary"
+                    className="w-full py-3"
+                    onClick={() => {
+                      navigate("/driver-dashboard");
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    Dashboard
+                  </NeoButton>
+                ) : (
+                  <NeoButton
+                    variant="secondary"
+                    className="w-full py-3"
+                    onClick={() => {
+                      navigate("/driver-login");
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    Driver Login
+                  </NeoButton>
+                )}
                 <NeoButton
                   variant="dark"
                   className="w-full py-3"

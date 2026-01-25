@@ -55,11 +55,11 @@ const DriverLoginPage = () => {
 
       if (driver) {
         setSuccess("Login successful! Redirecting...");
-        setTimeout(() => navigate("/"), 1500);
+        setTimeout(() => navigate("/driver-dashboard"), 1500);
       } else {
-        // User exists but no driver profile - redirect to complete profile
+        // User exists but no driver profile - redirect to dashboard to complete profile
         setSuccess("Login successful! Please complete your profile.");
-        setTimeout(() => navigate("/"), 1500);
+        setTimeout(() => navigate("/driver-dashboard"), 1500);
       }
     } catch (err) {
       console.error("Login error:", err);
