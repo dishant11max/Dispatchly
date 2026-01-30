@@ -8,6 +8,8 @@ import DriverVerificationPage from "@/pages/DriverVerificationPage";
 import DriverDashboardPage from "@/pages/DriverDashboardPage";
 import AdminDashboardPage from "@/pages/AdminDashboardPage";
 import AdminLoginPage from "@/pages/AdminLoginPage";
+import ClientLoginPage from "@/pages/ClientLoginPage";
+import ClientDashboardPage from "@/pages/ClientDashboardPage";
 import ContactPage from "@/pages/ContactPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { AuthProvider } from "@/context/AuthContext";
@@ -31,6 +33,8 @@ function App() {
           <Route path="/driver-dashboard" element={<DriverDashboardPage />} />
           <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/client-login" element={<ClientLoginPage />} />
+          <Route path="/client-dashboard" element={<ClientDashboardPage />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -105,14 +105,23 @@ const NeoLayout = ({ children }) => {
             <>
               {/* Driver Button Logic */}
               {!user ? (
-                /* Guest: Show Driver Login */
-                <NeoButton
-                  variant="secondary"
-                  className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
-                  onClick={() => navigate("/driver-login")}
-                >
-                  Driver Login
-                </NeoButton>
+                /* Guest: Show Driver & Client Login */
+                <div className="flex gap-4">
+                  <NeoButton
+                    variant="secondary"
+                    className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
+                    onClick={() => navigate("/client-login")}
+                  >
+                    Client Portal
+                  </NeoButton>
+                  <NeoButton
+                    variant="primary"
+                    className="py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm"
+                    onClick={() => navigate("/driver-login")}
+                  >
+                    Driver Login
+                  </NeoButton>
+                </div>
               ) : user?.user_metadata?.role === "driver" ? (
                 /* Driver: Show Dashboard */
                 <NeoButton
@@ -200,16 +209,28 @@ const NeoLayout = ({ children }) => {
                     Dashboard
                   </NeoButton>
                 ) : (
-                  <NeoButton
-                    variant="secondary"
-                    className="w-full py-3"
-                    onClick={() => {
-                      navigate("/driver-login");
-                      setMobileMenuOpen(false);
-                    }}
-                  >
-                    Driver Login
-                  </NeoButton>
+                  <>
+                    <NeoButton
+                      variant="secondary"
+                      className="w-full py-3"
+                      onClick={() => {
+                        navigate("/client-login");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Client Portal
+                    </NeoButton>
+                    <NeoButton
+                      variant="primary"
+                      className="w-full py-3"
+                      onClick={() => {
+                        navigate("/driver-login");
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Driver Login
+                    </NeoButton>
+                  </>
                 )}
                 <NeoButton
                   variant="dark"
